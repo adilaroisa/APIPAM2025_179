@@ -27,7 +27,6 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        // Nama file: timestamp-namaasli (untuk menghindari duplikat)
         cb(null, Date.now() + '-' + file.originalname.replace(/\s/g, '_'));
     }
 });
@@ -96,7 +95,7 @@ app.post('/api/auth/login', (req, res) => {
 // 3. GET ARTICLES (List)
 app.get('/api/articles', (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const limit = 3; 
+    const limit = 20 
     const offset = (page - 1) * limit;
 
     const keyword = req.query.q;
